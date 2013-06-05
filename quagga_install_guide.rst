@@ -1,5 +1,4 @@
 
-
 1) under ubuntu 13.04
 
 ::
@@ -9,8 +8,8 @@
    apt-get install libreadline6-dev
 
 
-
 ::
+
    sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
    
    sysctl net.ipv4.ip_forward=1
@@ -60,6 +59,7 @@ use vtysh::
 会提示输入口令，我们通过/usr/local/etc/zebra.conf可以看到口令是zebra，enable口令也是zebra。输 入口令zebra，得到路由器用户模式提示符： 
 
 ::
+
    Router>
 
 
