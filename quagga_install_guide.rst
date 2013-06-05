@@ -1,4 +1,3 @@
-
 1) under ubuntu 13.04
 
 ::
@@ -15,8 +14,9 @@
    sysctl net.ipv4.ip_forward=1
 
 
-2) download quagga-0.99.22.tar.gz from http://www.nongnu.org/quagga/
-
+2) download quagga
+lastest verion is quagga-0.99.22.tar.gz
+from http://www.nongnu.org/quagga/
 
 
 3) install quagga
@@ -43,15 +43,13 @@
    zebra -d
 
 
+5) configuration
+
 use vtysh::
 
    vtysh
 
-
-5) configuration
-
-
-::
+or use telnet::
 
    telnet localhost 2601
 
