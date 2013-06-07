@@ -26,7 +26,7 @@ from http://www.nongnu.org/quagga/
    tar xvf quagga-0.99.22.tar.gz
    
    cd quagga-0.99.22
-   ./configure
+   ./configure ./configure --enable-vtysh --enable-user=root --enable-group=root --enable-vty-group=root
    
    make
    make install
