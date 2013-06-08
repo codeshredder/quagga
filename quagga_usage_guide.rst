@@ -37,6 +37,13 @@ This is a quagga based router test model.
 1. Overview
 ==============
 
+nework topologies:
+
+:Router: NICs
+:r1: eth0 (192.168.0.100), eth1 (192.168.1.100)
+:r2: eth0 (192.168.0.200), eth1 (192.168.2.200)
+
+
 
 2. Install Quagga
 ==============
