@@ -214,7 +214,7 @@ if want to save config, can use::
    # copy run start
 
 
-when finished,we can show the status::
+when finished,we can show the status to check if rip work well::
 
    # show ip route
    Codes: K - kernel route, C - connected, S - static, R - RIP,
@@ -235,6 +235,9 @@ when finished,we can show the status::
    C(i) 192.168.0.0/24     0.0.0.0               1 self              0
    R(n) 192.168.1.0/24     192.168.0.100         2 192.168.0.100     0 03:00
    C(i) 192.168.2.0/24     0.0.0.0               1 self              0
+   
+   # in linux shell
+   # route
 
 if working well, router2 will find some router1's information.
 
@@ -318,6 +321,8 @@ when finished,we can show the status to check if ospf work well::
          Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
    192.168.0.100       1 Full/DR         33.348s 192.168.0.100     eth0:192.168.0.200       0     0     0
    
+   # in linux shell
+   # route
 
 
 5. BGP Test
@@ -331,6 +336,12 @@ start bgp deamon::
    
 (notice: eth port must be up)
 
+in default bgpd.conf, AS number has been set. Need to ignore by !::
+
+   vi /usr/local/etc/bgpd.conf
+   ! router bgp 7676
+
+
 route1::
 
    #vtysh
@@ -341,9 +352,58 @@ route1::
    (config)# interface  eth1
    (config-if)# ip address  192.168.1.100/24
    (config-if)# exit
-   (config)# router bgp
+   (config)# router bgp 7675
+   (config-router)# bgp  router-id  192.168.1.100
+   (config-router)# network 192.168.1.0/24
+   (config-router)# neighbor  192.168.0.200 remote-as  7676
+   (config-router)# exit
+   (config)# exit
+
+route2::
+
+   #vtysh
+   #configure  terminal
+   (config)# interface  eth0
+   (config-if)# ip address  192.168.0.200/24
+   (config-if)# exit
+   (config)# interface  eth1
+   (config-if)# ip address  192.168.2.200/24
+   (config-if)# exit
+   (config)# router bgp 7676
+   (config-router)# bgp  router-id  192.168.2.200
+   (config-router)# network 192.168.2.0/24
+   (config-router)# neighbor  192.168.0.100 remote-as  7675
+   (config-router)# exit
+   (config)# exit
+
+
+when finished,we can show the status to check if bgp work well::
+
+   # show ip route
+   Codes: K - kernel route, C - connected, S - static, R - RIP,
+          O - OSPF, I - IS-IS, B - BGP, A - Babel,
+          > - selected route, * - FIB route
+
+   C>* 192.168.0.0/24 is directly connected, eth0
+   B>* 192.168.1.0/24 [20/0] via 192.168.0.100, eth0, 00:00:21
+   C>* 192.168.2.0/24 is directly connected, eth4
    
+   # show ip bgp
+   BGP table version is 0, local router ID is 192.168.3.5
+   Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+                 r RIB-failure, S Stale, R Removed
+   Origin codes: i - IGP, e - EGP, ? - incomplete
    
+      Network          Next Hop            Metric LocPrf Weight Path
+   *> 192.168.1.0      192.168.0.100            0             0 7675 i
+   *> 192.168.2.0      0.0.0.0                  0         32768 i
+   
+   Total number of prefixes 2
+
+   # in linux shell
+   # route
+
+
 
 6. Quagga Patches
 ==============
