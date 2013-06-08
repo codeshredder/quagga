@@ -261,6 +261,7 @@ start ospf deamon::
    
    ospfd -d
    
+(notice: eth port must be up)
 
 route1::
 
@@ -322,7 +323,27 @@ when finished,we can show the status to check if ospf work well::
 5. BGP Test
 ==============
 
+start bgp deamon::
 
+   cp /usr/local/etc/bgpd.conf.sample /usr/local/etc/bgpd.conf
+   
+   bgpd -d
+   
+(notice: eth port must be up)
+
+route1::
+
+   #vtysh
+   #configure  terminal
+   (config)# interface  eth0
+   (config-if)# ip address  192.168.0.100/24
+   (config-if)# exit
+   (config)# interface  eth1
+   (config-if)# ip address  192.168.1.100/24
+   (config-if)# exit
+   (config)# router bgp
+   
+   
 
 6. Quagga Patches
 ==============
