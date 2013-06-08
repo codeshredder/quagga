@@ -101,7 +101,20 @@ or use telnet::
 
 password can be found in "/usr/local/etc/zebra.conf".(default password is "zebra")
 
+port can be found in "/etc/services".as below
 ::
+
+   zebrasrv        2600/tcp                        # zebra service
+   zebra           2601/tcp                        # zebra vty
+   ripd            2602/tcp                        # ripd vty (zebra)
+   ripngd          2603/tcp                        # ripngd vty (zebra)
+   ospfd           2604/tcp                        # ospfd vty (zebra)
+   bgpd            2605/tcp                        # bgpd vty (zebra)
+   ospf6d          2606/tcp                        # ospf6d vty (zebra)
+   ospfapi         2607/tcp                        # OSPF-API
+
+
+if login successfully, prompt::
 
    Router>
 
