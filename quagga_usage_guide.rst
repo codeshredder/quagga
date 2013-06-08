@@ -164,6 +164,13 @@ check all the cmd in this mode::
 3. RTP Test
 ==============
 
+start rip deamon:：
+
+   cp /usr/local/etc/ripd.conf.sample /usr/local/etc/ripd.conf
+   
+   ripd -d
+   
+
 route1::
 
    #vtysh
@@ -202,6 +209,11 @@ route2::
 cmds are in different mode which can be distinguished by prompt, such as #, (config)#, (config-if)#, (config-router)# .
 
 we must configure interface and router(rip,ospf,bgp.. are different.)
+
+if want to save config, can use::
+
+   # copy run start
+
 
 when finished,we can show the status::
 
