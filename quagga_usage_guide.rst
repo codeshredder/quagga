@@ -241,6 +241,19 @@ when finished,we can show the status::
 if working well, router2 will find some router1's information.
 
 
+how to debug::
+
+   # debug rip events
+   # debug rip packet
+   # configure  terminal
+   (config)# log file /tmp/ripd.log
+   
+   #then exit to linux shell
+   #tail -f /tmp/ripd.log
+
+
+
+
 4. OSPF Test
 ==============
 
