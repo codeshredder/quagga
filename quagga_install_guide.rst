@@ -1,3 +1,48 @@
+
+==========================================================
+  Quagga Usage Guide
+==========================================================
+
+
+Authors
+==========
+
+`codeshredder <https://github.com/codeshredder>`_ 
+
+Reference
+==========
+
+
+
+Table of Contents
+=================
+
+::
+
+  0. What is it?
+  1. Overview
+  2. Install Quagga
+  3. RIP Test
+  4. OSPF Test
+  5. BGP Test
+  6. Quagga Patches
+  7. Licensing
+  8. Contacts
+
+0. What is it?
+==============
+
+This is a quagga based router test model.
+
+
+1. Overview
+==============
+
+
+2. Install Quagga
+==============
+
+
 1) under ubuntu 13.04
 
 ::
@@ -73,18 +118,37 @@ or use telnet::
    Router# ? 
 
 
-
-
-6) RIP test
-
+3. RTP Test
+==============
 
 
 
 
-7) OSPF test
+4. OSPF Test
+==============
 
 
 
-8) BGP test
+5. BGP Test
+==============
 
 
+
+6. Quagga Patches
+==============
+
+
+
+
+
+7. Licensing
+============
+
+This project is licensed under Creative Commons License.
+
+To view a copy of this license, visit [ http://creativecommons.org/licenses/ ].
+
+8. Contacts
+===========
+
+codeshredder  : evilforce@gmail.com
