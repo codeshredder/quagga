@@ -221,8 +221,6 @@ when finished,we can show the status::
        O - OSPF, I - IS-IS, B - BGP, A - Babel,
        > - selected route, * - FIB route
    
-   K>* 0.0.0.0/0 via 10.141.123.1, eth4
-   C>* 127.0.0.0/8 is directly connected, lo
    C>* 192.168.0.0/24 is directly connected, eth0
    R>* 192.168.1.0/24 [120/2] via 192.168.0.100, eth0, 01:13:34
    C>* 192.168.2.0/24 is directly connected, eth1
@@ -257,6 +255,68 @@ how to debug::
 4. OSPF Test
 ==============
 
+start ospf deamon::
+
+   cp /usr/local/etc/ospfd.conf.sample /usr/local/etc/ospfd.conf
+   
+   ospfd -d
+   
+
+route1::
+
+   #vtysh
+   #configure  terminal
+   (config)# interface  eth0
+   (config-if)# ip address  192.168.0.100/24
+   (config-if)# exit
+   (config)# interface  eth1
+   (config-if)# ip address  192.168.1.100/24
+   (config-if)# exit
+   (config)# router ospf
+   (config-router)# router-id  192.168.0.100
+   (config-router)# network 192.168.0.0/24 area 0
+   (config-router)# network 192.168.1.0/24 area 1
+   (config-if)# exit
+   (config)# exit
+   #
+
+
+route2::
+
+   #vtysh
+   #configure  terminal
+   (config)# interface  eth0
+   (config-if)# ip address  192.168.0.200/24
+   (config-if)# exit
+   (config)# interface  eth1
+   (config-if)# ip address  192.168.2.200/24
+   (config-if)# exit
+   (config)# router ospf
+   (config-router)# router-id  192.168.0.200
+   (config-router)# network 192.168.0.0/24 area 0
+   (config-router)# network 192.168.2.0/24 area 2
+   (config-if)# exit
+   (config)# exit
+   #
+
+when finished,we can show the status to check if ospf work well::
+
+   # show ip route
+   Codes: K - kernel route, C - connected, S - static, R - RIP,
+          O - OSPF, I - IS-IS, B - BGP, A - Babel,
+          > - selected route, * - FIB route
+   
+   O   192.168.0.0/24 [110/10] is directly connected, eth0, 00:00:18
+   C>* 192.168.0.0/24 is directly connected, eth0
+   O>* 192.168.1.0/24 [110/20] via 192.168.0.100, eth0, 00:00:13
+   O   192.168.2.0/24 [110/10] is directly connected, eth1, 00:00:06
+   C>* 192.168.2.0/24 is directly connected, eth1
+   
+   # show ip ospf  neighbor
+   
+         Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
+   192.168.0.100       1 Full/DR         33.348s 192.168.0.100     eth0:192.168.0.200       0     0     0
+   
 
 
 5. BGP Test
