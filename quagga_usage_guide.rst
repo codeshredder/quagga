@@ -43,6 +43,10 @@ nework topologies:
 :r1: eth0 (192.168.0.100), eth1 (192.168.1.100)
 :r2: eth0 (192.168.0.200), eth1 (192.168.2.200)
 
+r1,r2 are connected with eth0.(quagga can not support vlan(like vlan1))
+
+eth1 connected to another network.
+
 
 
 2. Install Quagga
@@ -160,7 +164,70 @@ check all the cmd in this mode::
 3. RTP Test
 ==============
 
+route1::
 
+   #vtysh
+   #configure  terminal
+   (config)# interface  eth0
+   (config-if)# ip address  192.168.0.100/24
+   (config-if)# exit
+   (config)# interface  eth1
+   (config-if)# ip address  192.168.1.100/24
+   (config-if)# exit
+   (config)# router rip
+   (config-router)# network 192.168.0.0/24
+   (config-router)# network 192.168.1.0/24
+   (config-if)# exit
+   (config)# exit
+   #
+
+
+route2::
+
+   #vtysh
+   #configure  terminal
+   (config)# interface  eth0
+   (config-if)# ip address  192.168.0.200/24
+   (config-if)# exit
+   (config)# interface  eth1
+   (config-if)# ip address  192.168.2.200/24
+   (config-if)# exit
+   (config)# router rip
+   (config-router)# network 192.168.0.0/24
+   (config-router)# network 192.168.2.0/24
+   (config-if)# exit
+   (config)# exit
+   #
+
+cmds are in different mode which can be distinguished by prompt, such as #, (config)#, (config-if)#, (config-router)# .
+
+we must configure interface and router(rip,ospf,bgp.. are different.)
+
+when finished,we can show the status::
+
+   # show ip route
+   Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, A - Babel,
+       > - selected route, * - FIB route
+   
+   K>* 0.0.0.0/0 via 10.141.123.1, eth4
+   C>* 127.0.0.0/8 is directly connected, lo
+   C>* 192.168.0.0/24 is directly connected, eth0
+   R>* 192.168.1.0/24 [120/2] via 192.168.0.100, eth0, 01:13:34
+   C>* 192.168.2.0/24 is directly connected, eth1
+   
+   # show ip rip
+   Codes: R - RIP, C - connected, S - Static, O - OSPF, B - BGP
+   Sub-codes:
+         (n) - normal, (s) - static, (d) - default, (r) - redistribute,
+         (i) - interface
+
+        Network            Next Hop         Metric From            Tag Time
+   C(i) 192.168.0.0/24     0.0.0.0               1 self              0
+   R(n) 192.168.1.0/24     192.168.0.100         2 192.168.0.100     0 03:00
+   C(i) 192.168.2.0/24     0.0.0.0               1 self              0
+
+if working well, router2 will find some router1's information.
 
 
 4. OSPF Test
