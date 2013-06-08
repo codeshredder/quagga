@@ -59,8 +59,10 @@ This is a quagga based router test model.
 
 
 2) download quagga
-lastest verion is quagga-0.99.22.tar.gz
+
 from http://www.nongnu.org/quagga/
+
+lastest verion is quagga-0.99.22.tar.gz
 
 
 3) install quagga
@@ -97,24 +99,42 @@ or use telnet::
 
    telnet localhost 2601
 
-
-会提示输入口令，我们通过/usr/local/etc/zebra.conf可以看到口令是zebra，enable口令也是zebra。输 入口令zebra，得到路由器用户模式提示符： 
+password can be found in "/usr/local/etc/zebra.conf".(default password is "zebra")
 
 ::
 
    Router>
 
-
-进入特权模式::
+use "enable" to admin mode.
+::
 
    Router> enable
    
    Password: 
 
 
-提供了的路由命令::
+check all the cmd in this mode::
 
    Router# ? 
+   clear        Reset functions
+   configure    Configuration from vty interface
+   copy         Copy from one file to another
+   debug        Enable debug messages for specific or all part.
+   disable      Turn off privileged mode command
+   end          End current mode and change to enable mode
+   exit         Exit current mode and down to previous mode
+   list         Print command list
+   no           Negate a command or set its defaults
+   ping         Send echo messages
+   quit         Exit current mode and down to previous mode
+   show         Show running system information
+   ssh          Open an ssh connection
+   start-shell  Start UNIX shell
+   telnet       Open a telnet connection
+   terminal     Set terminal line parameters
+   traceroute   Trace route to destination
+   undebug      Disable debugging functions (see also 'debug')
+   write        Write running configuration to memory, network, or terminal
 
 
 3. RTP Test
