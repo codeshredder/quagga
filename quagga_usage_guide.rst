@@ -94,9 +94,8 @@ lastest verion is quagga-0.99.22.tar.gz
 
 ::
 
-   cd /usr/local/etc/
-   cp zebra.conf.sample zebra.conf
-
+   cp /usr/local/etc/zebra.conf.sample /usr/local/etc/zebra.conf
+   
    zebra -d
 
 
@@ -164,7 +163,7 @@ check all the cmd in this mode::
 3. RTP Test
 ==============
 
-start rip deamon:：
+start rip deamon::
 
    cp /usr/local/etc/ripd.conf.sample /usr/local/etc/ripd.conf
    
