@@ -163,7 +163,7 @@ check all the cmd in this mode::
    write        Write running configuration to memory, network, or terminal
 
 
-3. RTP Test
+3. RIP Test
 ==============
 
 start rip deamon::
