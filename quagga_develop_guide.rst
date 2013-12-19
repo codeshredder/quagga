@@ -90,7 +90,8 @@ lastest verion is quagga-0.99.22.tar.gz
    
    make
    make install
-
+   
+   export LD_LIBRARY_PATH=/usr/local/lib
 
 
 4) run
